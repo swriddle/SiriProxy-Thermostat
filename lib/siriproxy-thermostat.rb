@@ -20,12 +20,11 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
   listen_for(/temperature.*in here/i) { show_temperature }
 
   def do_the_dinosaur(x)
-    say "Dinosaurs are neat"
     cmd = "python /Users/sean/netflix-plugin/searcher.py \"" + x + "\""
     output = `#{cmd}`
     r = /^spoken=(.*)\*\*\*\*written=(.*)$/m
     m = r.match(output)
-    say m[1], spoken: m[0]
+    say m[2], spoken: m[1]
     File.open("/Users/sean/rubyruby.txt", "w") { |f| f.write(output) }
     request_completed
   end
