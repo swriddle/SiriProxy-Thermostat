@@ -20,7 +20,8 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
   listen_for(/temperature.*in here/i) { show_temperature }
 
   def do_the_dinosaur(x)
-    cmd = "python /Users/sean/netflix-plugin/searcher.py \"" + x + "\""
+    y = x.gsub(" ", "_")
+    cmd = "python /Users/sean/netflix-plugin/searcher.py " + y
     output = `#{cmd}`
     r = /^spoken=(.*)\*\*\*\*written=(.*)$/m
     m = r.match(output)
