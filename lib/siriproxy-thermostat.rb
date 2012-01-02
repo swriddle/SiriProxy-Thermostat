@@ -8,7 +8,7 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
     self.host = config["host"]
   end
 
-  listen_for(/dinosaur/i) { do_the_dinosaur }
+  listen_for(/is (.*) on netflix/i) { do_the_dinosaur(x) }
   #capture thermostat status
   listen_for(/thermostat.*status/i) { show_status_of_thermostat }
   listen_for(/status.*thermostat/i) { show_status_of_thermostat }
@@ -19,9 +19,11 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
   listen_for(/inside.*temperature/i) { show_temperature }
   listen_for(/temperature.*in here/i) { show_temperature }
 
-  def do_the_dinosaur
+  def do_the_dinosaur(x)
     say "Dinosaurs are neat"
-    output = `pwd` + "AMSTERDAM" + `ls`
+    cmd = "python /Users/sean/netflix-plugin/searcher.py \"" + x + "\""
+    output = `#{cmd}`
+    say output
     File.open("/Users/sean/rubyruby.txt", "w") { |f| f.write(output) }
     request_completed
   end
