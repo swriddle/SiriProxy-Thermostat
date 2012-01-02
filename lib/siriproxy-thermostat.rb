@@ -23,7 +23,9 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
     say "Dinosaurs are neat"
     cmd = "python /Users/sean/netflix-plugin/searcher.py \"" + x + "\""
     output = `#{cmd}`
-    say output
+    r = /^spoken=(.*)\*\*\*\*written=(.*)$/m
+    m = r.match(output)
+    say m[1], spoken: m[0]
     File.open("/Users/sean/rubyruby.txt", "w") { |f| f.write(output) }
     request_completed
   end
