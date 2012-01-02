@@ -8,6 +8,7 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
     self.host = config["host"]
   end
 
+  listen_for(/dinosaur/i) { do_the_dinosaur }
   #capture thermostat status
   listen_for(/thermostat.*status/i) { show_status_of_thermostat }
   listen_for(/status.*thermostat/i) { show_status_of_thermostat }
@@ -17,6 +18,11 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
   listen_for(/temperature.*inside/i) { show_temperature }
   listen_for(/inside.*temperature/i) { show_temperature }
   listen_for(/temperature.*in here/i) { show_temperature }
+
+  def do_the_dinosaur
+    say "Dinosaurs are neat"
+    request_completed
+  end
 
   def show_status_of_thermostat
     say "Checking the status of the thermostat"
