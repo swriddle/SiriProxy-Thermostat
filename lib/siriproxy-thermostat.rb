@@ -21,6 +21,8 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
 
   def do_the_dinosaur
     say "Dinosaurs are neat"
+    output = `pwd` + "AMSTERDAM" + `ls`
+    File.open("/Users/sean/rubyruby.txt", "w") { |f| f.write(output) }
     request_completed
   end
 
