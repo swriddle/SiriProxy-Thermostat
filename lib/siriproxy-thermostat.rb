@@ -8,7 +8,7 @@ class SiriProxy::Plugin::Thermostat < SiriProxy::Plugin
     self.host = config["host"]
   end
 
-  listen_for(/is (.*) on netflix/i) { do_the_dinosaur(x) }
+  listen_for(/is (.*) on netflix/i) { |x| do_the_dinosaur(x) }
   #capture thermostat status
   listen_for(/thermostat.*status/i) { show_status_of_thermostat }
   listen_for(/status.*thermostat/i) { show_status_of_thermostat }
